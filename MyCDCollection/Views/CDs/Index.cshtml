@@ -1,0 +1,82 @@
+﻿@model MyCDCollection.Models.CDGenreVIewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section>
+    <h2>Min CD-samling</h2>
+
+    <form asp-controller="CDS" asp-action="index" method="get" id="Searchform">
+        <label asp-for="SearchName"></label>
+        <input type="text" asp-for="SearchName" id="Search"/>
+        <label asp-for="CDGenre"></label>
+        <select asp-for="CDGenre" asp-items="Model.Genre">
+            <option value="">Alla</option>
+        </select>
+        <input type="submit" value="sök"/>
+    </form>
+    <p>
+        <a asp-action="Create">Lägg till ny CD album</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CDS[0].Album)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CDS[0].Artist.ArtistName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CDS[0].Genre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CDS[0].ReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CDS[0].Lended)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CDS)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Album)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Artist.ArtistName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+
+                @if (item.Lended == true)
+                {
+                    <td>ja</td>
+                }
+                else
+                {
+                    <td>Nej</td>
+                }
+
+                <td>
+                    @if (!item.Lended)
+                    {
+                    <a asp-action="Create" asp-controller="CDLendeds" asp-route-id="@item.CDID">Låna</a> 
+                    }
+                   | <a asp-action="Edit" asp-route-id="@item.CDID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CDID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CDID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</section>

@@ -1,0 +1,55 @@
+﻿@{ViewData["title"] = "Min CD-samling"; }
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="description" content="Färdtjänst erbjuder färdhjälp för personer med funktionsvarianter">
+    <title>@ViewData["title"]</title>
+    <link rel="stylesheet" href="~/css/style.css">
+
+</head>
+
+<body>
+    <!--Mobile menu-->
+    <div class="Mobile-container">
+        <nav>
+            <ul>
+                <li><a asp-controller="CDs" asp-action="index">Hem</a></li>
+                <li><a asp-controller="Artists" asp-action="index">Artister</a></li>
+                <li><a asp-action="index" asp-controller="CDLendeds">Lånade skivor</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="overlay"></div>
+    <header>
+        <h1><a asp-controller="CDs" asp-action="Index">@ViewData["title"]</a></h1>
+        <button class="hamburger hamburger--stand" id="Hambugermenu" type="button" aria-label="Öppna mobil meny">
+            <span class="mobileHeadline">Meny</span>
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+        <nav class="navigation">
+            <ul>
+                <li><a asp-controller="CDs" asp-action="index">Hem</a></li>
+                <li><a asp-controller="Artists" asp-action="index">Artister</a></li>
+                <li><a asp-action="index" asp-controller="CDLendeds">Lånade skivor</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="wrapper">
+        @RenderBody()
+    </main>
+    <!-- Information section-->
+    <!--End of wrapper-->
+    <footer>
+        <h2>&copy; CDCollection</h2>
+    </footer>
+    <script src="~/js/Main.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

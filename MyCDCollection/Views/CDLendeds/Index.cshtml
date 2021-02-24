@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MyCDCollection.Models.CDLended>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section>
+    <h2>Lånade skivor</h2>
+    <table class="table" id="Lended">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SurName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CDs.Album)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lended)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CDs.Album)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Lended)
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PersonID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PersonID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PersonID">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>
